@@ -18,6 +18,7 @@ if (!(HOST || USER || DATABASE || PASSWORD)) {
 const conn = mysql.createPool({
     host: HOST,
     user: USER,
+    password: PASSWORD,
     database: DATABASE,
 
 });
