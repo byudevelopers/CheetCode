@@ -9,7 +9,7 @@ function Header() {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid p-2">
-                <Link className="navbar-brand fs-3 animate-font-weight" to="/">Cheat Code</Link>
+                <Link className="navbar-brand fs-3 animate-font-weight" to="/">Cheet Code</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
                     aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
