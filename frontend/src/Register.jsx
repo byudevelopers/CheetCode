@@ -13,8 +13,8 @@ function Register() {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        password_one: '',
-        password_two: ''
+        passwordOne: '',
+        passwordTwo: ''
     });
 
     const [formErrors, setFormErrors] = useState({});
@@ -43,11 +43,11 @@ function Register() {
             errors.email = "Email is required";
         }
 
-        if (!form.password_one || !form.password_two) {
+        if (!form.passwordOne || !form.passwordTwo) {
             errors.password_one = "Password is required";
         }
 
-        if (form.password_one !== form.password_two) {
+        if (form.passwordOne !== form.passwordTwo) {
             errors.password_two = "Passwords must match";
         }
 
@@ -69,7 +69,7 @@ function Register() {
         try {
 
 
-            const formDataStripped = { ...formData, password: formData.Password_One, password_One: null, password_Two: null };
+            const formDataStripped = { ...formData, password: formData.passwordOne, passwordOne: null, passwordTwo: null };
 
             const response = await fetch('/api/auth/register', {
                 method: 'POST',
@@ -117,7 +117,7 @@ function Register() {
 
 
                         <label htmlFor="" className="form-label">Name</label>
-                        <input type="text" required={true} minLength="1" className="form-control" maxLength="20" name="Name" onChange={handleChange} placeholder="Enter First Name (One Word)" />
+                        <input type="text" required={true} minLength="1" className="form-control" maxLength="20" name="name" onChange={handleChange} placeholder="Enter First Name (One Word)" />
 
                     </div>
                     <div className="form-group p-2">
@@ -131,12 +131,12 @@ function Register() {
                     <div className="form-group p-2">
 
                         <label htmlFor="password" className="form-label">Password</label>
-                        <input type="password" required={true} className="form-control" minLength="6" maxLength="20" name="password_One" onChange={handleChange} placeholder="Password" />
+                        <input type="password" required={true} className="form-control" minLength="6" maxLength="20" name="passwordOne" onChange={handleChange} placeholder="Password" />
                     </div>
                     <div className="form-group p-2">
 
                         <label htmlFor="password" className="form-label">Password Again</label>
-                        <input type="password" required={true} className="form-control" minLength="6" maxLength="20" name="password_Two" onChange={handleChange} placeholder="Password" />
+                        <input type="password" required={true} className="form-control" minLength="6" maxLength="20" name="passwordTwo" onChange={handleChange} placeholder="Password" />
                     </div>
                     <div className="row ">
                         <div className="col-5 p-5 align-items-center text-center w-100">
