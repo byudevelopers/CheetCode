@@ -1,0 +1,10 @@
+id,type,title,url,difficulty
+680,arrays & hashing,Valid Palindrome II,https://leetcode.com/problems/valid-palindrome-ii/description/,easy
+42,two pointers,Trapping Rain Water,https://leetcode.com/problems/trapping-rain-water/description/,hard
+226,trees,Invert Binary Tree,https://leetcode.com/problems/invert-binary-tree/description/,easy
+36,arrays & hashing,Valid Sudoku,https://leetcode.com/problems/valid-sudoku/,medium
+23,linked list,Merge k Sorted Lists,https://leetcode.com/problems/merge-k-sorted-lists/description/,hard
+55,greedy,Jump Game,https://leetcode.com/problems/jump-game/description/,medium
+51,backtracking,N-Queens,https://leetcode.com/problems/n-queens/description/,hard
+15,two pointers,3Sum,https://leetcode.com/problems/3sum/description/,medium
+371,bit manipulation,Sum of Integers,https://leetcode.com/problems/sum-of-two-integers/description/,medium
