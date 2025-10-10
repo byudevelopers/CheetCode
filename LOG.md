@@ -18,3 +18,16 @@ Watch a GIT tutorial.
 Orion:
 Start port to typescript of front end.
 
+
+10/9:
+We talked about the different routes that need to be implemented and made a small dataset for dev purposes.
+We tried to parse it and load it into the database but not working as of right now.
+
+Allison:
+Review get and post and sql and json
+
+Orion:
+Start with App component on different branch and port it to typescript
+
+Garrett:
+Fix data set parsing in db.ts
