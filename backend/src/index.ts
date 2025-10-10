@@ -43,7 +43,7 @@ app.use('/api/auth', authRoutes);
 // });
 
 // Start server
-const startServer = async () => {
+const startServer = () => {
   try {
 
     app.listen(PORT, () => {
