@@ -16,12 +16,12 @@ export const authenticateUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const authHeader = req.headers.authorization;
+    // const authHeader = req.headers.authorization;
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      res.status(401).json({ success: false, message: 'Not authenticated' });
-      return;
-    }
+    // if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    //   res.status(401).json({ success: false, message: 'Not authenticated' });
+    //   return;
+    // }
 
     // const token = authHeader.substring(7); // Remove 'Bearer ' prefix
 

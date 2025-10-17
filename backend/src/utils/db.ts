@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
-import { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE } from "../models/table.ts";
+import { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE } from "../models/table.ts";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from "fs";
@@ -46,7 +46,7 @@ IGNORE 1 ROWS;
 await conn.execute(USER_TABLE);
 await conn.execute(USER_SESSION_TABLE);
 await conn.execute(PROBLEM_TABLE);
-
+await conn.execute(USER_PROBLEM_TABLE);
 
 await conn.query(LOAD_DATASET_QUERY);
 
