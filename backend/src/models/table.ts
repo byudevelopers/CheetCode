@@ -53,4 +53,4 @@ type UserTableType = z.infer<typeof UserTableSchema>;
 type UserSessionTableType = z.infer<typeof UserSessionTableSchema>; 
 
 
-export { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, UserTableType, UserSessionTableType };
+export { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE, UserTableType, UserSessionTableType };
