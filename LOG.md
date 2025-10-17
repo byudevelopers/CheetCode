@@ -31,3 +31,19 @@ Start with App component on different branch and port it to typescript
 
 Garrett:
 Fix data set parsing in db.ts
+
+10/16:
+Orion:
+Start with App component on different branch and port it to typescript. (Again)
+
+Aaron:
+Write a program in typescipt.
+
+Tyler:
+Implement a route on a seperate branch.
+
+Allison:
+Finish dashboard route (post).
+
+Garrett:
+Finish authenticate user middleware.
