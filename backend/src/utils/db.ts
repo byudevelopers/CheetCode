@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE } from "../models/table.ts";
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from "fs";
 
 dotenv.config()
 
@@ -22,6 +23,7 @@ const conn = mysql.createPool({
     user: USER,
     password: PASSWORD,
     database: DATABASE,
+    infileStreamFactory: path => fs.createReadStream(path)
 
 });
 
@@ -32,13 +34,12 @@ const datasetPath = path.join(__dirname, "../../dataset.csv")
 
 const LOAD_DATASET_QUERY = `
 LOAD DATA LOCAL INFILE '${datasetPath}'
-INTO TABLE ??
+INTO TABLE PROBLEM_TABLE 
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS; 
 `;
-
 
 
 // Ensure the db is configured correctly
@@ -47,6 +48,6 @@ await conn.execute(USER_SESSION_TABLE);
 await conn.execute(PROBLEM_TABLE);
 
 
-await conn.execute(LOAD_DATASET_QUERY, [datasetPath, "PROBLEM_TABLE"]);
+await conn.query(LOAD_DATASET_QUERY);
 
 export { conn };
