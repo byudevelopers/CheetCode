@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import authRoutes from './routes/auth.ts';
-
+import dashRoutes from "./routes/dashboard.ts" 
 import _ from "lodash";
 
 
@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/auth', authRoutes);
-
+app.use('/api', dashRoutes);
 // // Serve static files from frontend dist folder
 // const frontendDistPath = path.join(__dirname, '/dist');
 // app.use(express.static(frontendDistPath));

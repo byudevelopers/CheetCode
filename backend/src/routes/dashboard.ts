@@ -3,7 +3,7 @@ import { AuthenticatedRequest, authenticateUser } from '../middleware/auth';
 
 
 
-const router = express.Router();
+const dashRoutes = express.Router();
 
 
 
@@ -11,10 +11,9 @@ const router = express.Router();
 // User will pass in their jwt token as a parameter called token
 
 // TODO: Make sure to validate schema 
-router.post("/dashboard", authenticateUser, (req: AuthenticatedRequest, res: Response) =>{
+dashRoutes.post("/dashboard", authenticateUser, (req: AuthenticatedRequest, res: Response) =>{
 
 const userID = req.body.userID;
-
 const getProblemIDsForUser = `
 SELECT * FROM USER_PROBLEM_TABLE
 WHERE UserID = ?
@@ -34,3 +33,4 @@ return;
 
 });
 
+export default dashRoutes;

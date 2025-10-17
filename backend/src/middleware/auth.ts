@@ -27,7 +27,7 @@ export const authenticateUser = async (
 
     // // Get user data from database
     const findUserIDBySessionToken = `
-    SELECT * from USER_SESSION_TABLE
+    SELECT * from USER_SESSION
     WHERE SessionID = ? 
     `
     const [userSessionEntry] = (await conn.execute<RowDataPacket[]>(findUserIDBySessionToken, [decoded.sessionToken]))[0];
