@@ -47,3 +47,18 @@ Finish dashboard route (post).
 
 Garrett:
 Finish authenticate user middleware.
+
+
+10/23:
+Orion:
+Research FRS (Spaced repetition algo) and come up with implementation details
+
+Aaron:
+Implement barebones dashboard component that retrieves user problems
+
+Allison:
+Polish dashboard post route to make it work.
+Start a problem route
+
+Garrett:
+Do something
