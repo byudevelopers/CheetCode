@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth";
 
+
+
+
 function Header() {
 
     const { logout, isAuthenticated } = useContext(AuthContext);
@@ -22,12 +25,8 @@ function Header() {
                             </li>
 
                             <li className="nav-item m-2">
-                                <Link className="btn btn-outline-secondary col" to="/stats">Stats</Link>
+                                <Link className="btn btn-outline-secondary col" to="/dashboard">Dashboard</Link>
                             </li>
-
-
-
-
                         </> :
 
                             <>
@@ -36,6 +35,9 @@ function Header() {
                                 </li>
                                 <li className="nav-item m-2">
                                     <Link className="btn btn-outline-secondary col" to="/register">Register</Link>
+                                </li>
+                                <li className="nav-item m-2">
+                                    <Link className="btn btn-outline-secondary col" to="/dashboard">Dashboard</Link>
                                 </li>
                             </>
 

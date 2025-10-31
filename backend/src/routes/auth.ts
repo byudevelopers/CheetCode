@@ -138,6 +138,7 @@ router.post('/login', validateSchema(BaseUserSchema), async (req: Request, res: 
       success: false,
       message: 'Internal server error'
     });
+    return;
   }
 });
 

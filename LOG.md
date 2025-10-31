@@ -62,3 +62,13 @@ Start a problem route
 
 Garrett:
 Do something
+
+10/30:
+Aaron:
+Finish Dashboard component
+
+Allison:
+Watch react video and start on practice component / page
+
+Orion & Garrett:
+Integrate the ts-frs (sketch) || Generate the questions
