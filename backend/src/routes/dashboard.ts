@@ -24,34 +24,37 @@ WHERE UserID = ?
 // User will pass in their jwt token as a parameter called token
 
 // TODO: Make sure to validate schema 
-// dashRoutes.post("/dashboard", authenticateUser, async (req: AuthenticatedRequest, res: Response) => {
+dashRoutes.post("/dashboard", authenticateUser, async (req: AuthenticatedRequest, res: Response) => {
 
-//     const userID = req.body.userID;
-//     const problemID = req.body.problemID;
-
-
-//     if (problemID === undefined) { }
-
-//     const [problemDict] = await conn.execute<RowDataPacket[]>(getProblemIDsForUser, [userID]);
+    const userID = req.body.userID;
+    const problemID = req.body.problemID;
 
 
-//     problemDict[problemID] = !problemDict[problemID]
+    if (problemID === undefined) {
+        res.json({ success: false, message: "Problem ID is required" });
+        return;
+    }
+
+    const [rows] = await conn.execute<RowDataPacket[]>(getProblemIDsForUser, [userID]);
+    const problemDict = JSON.parse(rows[0].ProblemsCompletedID);
+
+    problemDict[problemID] = !problemDict[problemID]
 
 
-//     const updateProblemDoneForUser =
-//         `
-//     UPDATE USER_PROBLEM_TABLE
-//     SET ProblemsCompletedID = ?
-//     WHERE UserID = ?    
-//     `;
+    const updateProblemDoneForUser =
+        `
+    UPDATE USER_PROBLEM_TABLE
+    SET ProblemsCompletedID = ?
+    WHERE UserID = ?    
+    `;
 
-//     await conn.execute<RowDataPacket[]>(updateProblemDoneForUser, [problemDict]);
+    await conn.execute<RowDataPacket[]>(updateProblemDoneForUser, [JSON.stringify(problemDict), userID]);
 
 
-//     res.json({ success: true });
-//     return;
+    res.json({ success: true });
+    return;
 
-// });
+});
 
 
 dashRoutes.get('/dashboard', authenticateUser, async (req: AuthenticatedRequest, res: Response) => {
@@ -75,7 +78,7 @@ dashRoutes.get('/dashboard', authenticateUser, async (req: AuthenticatedRequest,
     }));
 
     res.json(problemsWithStatus);
-
+    return
 
 });
 
