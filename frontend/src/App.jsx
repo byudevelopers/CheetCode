@@ -29,8 +29,10 @@ function App() {
 			<Routes>
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
-				<Route path="/dashboard" element={<Dashboard />} />
-				<Route path="/practice" element={<Practice />} />
+				<ProtectedRoute>
+					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/practice" element={<Practice />} />
+				</ProtectedRoute>
 				<Route path="/" element={<Home />} />
 				<Route path="" element={<Home />} />
 			</Routes>

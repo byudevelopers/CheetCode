@@ -72,3 +72,11 @@ Watch react video and start on practice component / page
 
 Orion & Garrett:
 Integrate the ts-frs (sketch) || Generate the questions
+
+11/6:
+
+Orion: Figure out structured output for generating problems. Bare minimum add problems and answer to dataset for practice page.
+
+Garrett (Stash): Implement spaced repetition (ts-frs).
+
+Aaron & Alison: Make landing page for un-authenticated people. Figuring out the protected routes.
