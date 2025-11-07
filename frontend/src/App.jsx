@@ -3,6 +3,7 @@ import Login from "./Login.jsx";
 import Home from "./Home.jsx";
 import Register from "./Register.jsx";
 import Dashboard from "./Dashboard.jsx";
+import Practice from "./Practice.jsx";
 
 import Stats from "./Stats.jsx";
 import React, { useContext, useState, useEffect } from "react";
@@ -29,6 +30,7 @@ function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/dashboard" element={<Dashboard />} />
+				<Route path="/practice" element={<Practice />} />
 				<Route path="/" element={<Home />} />
 				<Route path="" element={<Home />} />
 			</Routes>

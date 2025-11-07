@@ -27,6 +27,9 @@ function Header() {
                             <li className="nav-item m-2">
                                 <Link className="btn btn-outline-secondary col" to="/dashboard">Dashboard</Link>
                             </li>
+                            <li className="nav-item m-2">
+                                <Link className="btn btn-outline-secondary col" to="/practice">Practice</Link>
+                            </li>
                         </> :
 
                             <>
@@ -38,6 +41,9 @@ function Header() {
                                 </li>
                                 <li className="nav-item m-2">
                                     <Link className="btn btn-outline-secondary col" to="/dashboard">Dashboard</Link>
+                                </li>
+                                <li className="nav-item m-2">
+                                    <Link className="btn btn-outline-secondary col" to="/practice">Practice</Link>
                                 </li>
                             </>
 
