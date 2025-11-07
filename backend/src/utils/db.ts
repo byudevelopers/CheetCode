@@ -23,8 +23,9 @@ const conn = mysql.createPool({
     user: USER,
     password: PASSWORD,
     database: DATABASE,
-    infileStreamFactory: path => fs.createReadStream(path)
-});
+    localInfile: true,
+    infileStreamFactory: (path : string) => fs.createReadStream(path)
+} as any);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
