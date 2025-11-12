@@ -36,6 +36,14 @@ difficulty VARCHAR(10) NOT NULL
 )
 `
 
+const SR_CARD_TABLE = `
+CREATE TABLE IF NOT EXISTS SR_CARD (
+CardID int NOT NULL PRIMARY KEY,
+UserID int NOT NULL,
+NextReview DATETIME NOT NULL
+)
+`;
+
 const UserTableSchema = z.object({
     UserID: z.int(),
     Name: z.string(),
@@ -49,8 +57,15 @@ const UserSessionTableSchema = z.object({
     Expires_At: z.bigint()
 })
 
+const SRCardTableSchema = z.object({
+    CardID: z.int(),
+    UserID: z.int(),
+    NextReview: z.string()
+
+})
+
 type UserTableType = z.infer<typeof UserTableSchema>;
-type UserSessionTableType = z.infer<typeof UserSessionTableSchema>; 
+type UserSessionTableType = z.infer<typeof UserSessionTableSchema>;
+type SRCardTableType = z.infer<typeof SRCardTableSchema>;
 
-
-export { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE, UserTableType, UserSessionTableType };
+export { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE, SR_CARD_TABLE, UserTableType, UserSessionTableType, SRCardTableType };
