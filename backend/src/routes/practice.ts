@@ -14,6 +14,7 @@ export interface Example {
 }
 
 export interface Problem {
+    id: number;
     title: string;          // Problem title
     desc: string;           // Problem description
     examples: Example[];    // Array of examples
@@ -77,6 +78,7 @@ dashRoutes.get('/practice', authenticateUser, async (req: AuthenticatedRequest, 
 
 
             const parsedProblem: Problem = {
+                id: problemData.id,
                 title: problemData.title,
                 desc: "Problem Description",
                 examples: [
