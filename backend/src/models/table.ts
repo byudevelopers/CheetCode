@@ -36,10 +36,13 @@ difficulty VARCHAR(10) NOT NULL
 )
 `
 
+// This should be merged at some point with user_problem_table
 const SR_CARD_TABLE = `
 CREATE TABLE IF NOT EXISTS SR_CARD (
-CardID int NOT NULL PRIMARY KEY,
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ProblemID int NOT NULL,
 UserID int NOT NULL,
+Card JSON NOT NULL,
 NextReview DATETIME NOT NULL
 )
 `;
@@ -60,8 +63,8 @@ const UserSessionTableSchema = z.object({
 const SRCardTableSchema = z.object({
     CardID: z.int(),
     UserID: z.int(),
+    Card: z.json(),
     NextReview: z.string()
-
 })
 
 type UserTableType = z.infer<typeof UserTableSchema>;

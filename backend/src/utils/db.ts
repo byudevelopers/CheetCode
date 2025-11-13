@@ -31,15 +31,6 @@ const __dirname = path.dirname(__filename);
 
 const datasetPath = path.join(__dirname, "../../dataset.csv");
 
-// const LOAD_DATASET_QUERY = `
-// LOAD DATA LOCAL INFILE '${datasetPath}'
-// INTO TABLE PROBLEM_TABLE
-// FIELDS TERMINATED BY ','
-// ENCLOSED BY '"'
-// LINES TERMINATED BY '\n'
-// IGNORE 1 ROWS;
-// `;
-
 const LOAD_DATASET_QUERY = `
   LOAD DATA LOCAL INFILE 'dataset.csv'
   INTO TABLE PROBLEM_TABLE
