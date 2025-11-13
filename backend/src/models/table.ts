@@ -59,6 +59,13 @@ const UserSessionTableSchema = z.object({
     Created_At: z.bigint(),
     Expires_At: z.bigint()
 })
+const ProblemTableSchema = z.object({
+    id: z.number(),
+    type: z.string(),
+    title: z.string(),
+    url: z.string(),
+    difficulty: z.string(),
+});
 
 const SRCardTableSchema = z.object({
     CardID: z.int(),
@@ -67,8 +74,10 @@ const SRCardTableSchema = z.object({
     NextReview: z.string()
 })
 
+
 type UserTableType = z.infer<typeof UserTableSchema>;
 type UserSessionTableType = z.infer<typeof UserSessionTableSchema>;
+type ProblemTableType = z.infer<typeof ProblemTableSchema>;
 type SRCardTableType = z.infer<typeof SRCardTableSchema>;
 
-export { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE, SR_CARD_TABLE, UserTableType, UserSessionTableType, SRCardTableType };
+export { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE, SR_CARD_TABLE, UserTableType, UserSessionTableType, ProblemTableType, SRCardTableType };
