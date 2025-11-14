@@ -80,3 +80,13 @@ Orion: Figure out structured output for generating problems. Bare minimum add pr
 Garrett (Stash): Implement spaced repetition (ts-frs).
 
 Aaron & Alison: Make landing page for un-authenticated people. Figuring out the protected routes.
+
+11/13:
+
+Orion: Update the dataset.csv and corresponding table and code in endpoints
+
+Aaron & Alison: Setup up the practice page so that user can record their
+confidence level and get another card.
+
+Garrett: Refactor practice & dashboard routes.
+
