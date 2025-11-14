@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
-import { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE } from "../models/table.ts";
+import { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE, SR_CARD_TABLE } from "../models/table.ts";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from "fs";
@@ -23,7 +23,6 @@ const conn = mysql.createPool({
     user: USER,
     password: PASSWORD,
     database: DATABASE,
-    localInfile: true,
     infileStreamFactory: (path : string) => fs.createReadStream(path)
 } as any);
 
@@ -31,15 +30,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const datasetPath = path.join(__dirname, "../../dataset.csv");
-
-// const LOAD_DATASET_QUERY = `
-// LOAD DATA LOCAL INFILE '${datasetPath}'
-// INTO TABLE PROBLEM_TABLE
-// FIELDS TERMINATED BY ','
-// ENCLOSED BY '"'
-// LINES TERMINATED BY '\n'
-// IGNORE 1 ROWS;
-// `;
 
 const LOAD_DATASET_QUERY = `
   LOAD DATA LOCAL INFILE 'dataset.csv'
@@ -56,7 +46,11 @@ await conn.execute(USER_TABLE);
 await conn.execute(USER_SESSION_TABLE);
 await conn.execute(PROBLEM_TABLE);
 await conn.execute(USER_PROBLEM_TABLE);
+await conn.execute(SR_CARD_TABLE);
 
+
+// Need to ensure that loading local files is enabled in your db.
+// Use the following command in the console: SET GLOBAL local_infile = 'ON';
 await conn.query(LOAD_DATASET_QUERY);
 
 export { conn };

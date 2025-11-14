@@ -36,6 +36,17 @@ difficulty VARCHAR(10) NOT NULL
 )
 `
 
+// This should be merged at some point with user_problem_table
+const SR_CARD_TABLE = `
+CREATE TABLE IF NOT EXISTS SR_CARD (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ProblemID int NOT NULL,
+UserID int NOT NULL,
+Card JSON NOT NULL,
+NextReview DATETIME NOT NULL
+)
+`;
+
 const UserTableSchema = z.object({
     UserID: z.int(),
     Name: z.string(),
@@ -48,9 +59,25 @@ const UserSessionTableSchema = z.object({
     Created_At: z.bigint(),
     Expires_At: z.bigint()
 })
+const ProblemTableSchema = z.object({
+    id: z.number(),
+    type: z.string(),
+    title: z.string(),
+    url: z.string(),
+    difficulty: z.string(),
+});
+
+const SRCardTableSchema = z.object({
+    CardID: z.int(),
+    UserID: z.int(),
+    Card: z.json(),
+    NextReview: z.string()
+})
+
 
 type UserTableType = z.infer<typeof UserTableSchema>;
-type UserSessionTableType = z.infer<typeof UserSessionTableSchema>; 
+type UserSessionTableType = z.infer<typeof UserSessionTableSchema>;
+type ProblemTableType = z.infer<typeof ProblemTableSchema>;
+type SRCardTableType = z.infer<typeof SRCardTableSchema>;
 
-
-export { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE, UserTableType, UserSessionTableType };
+export { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE, SR_CARD_TABLE, UserTableType, UserSessionTableType, ProblemTableType, SRCardTableType };
