@@ -74,7 +74,7 @@ function Login() {
 
             login(data.token);
             setAccountName(data.name);
-            navigate('/');
+            navigate('/dashboard');
         }
         catch (error) {
             setFormErrors({ ...formErrors, msg: error.message });

@@ -43,22 +43,6 @@ function Practice() {
     }, [token]);
 
 
-
-
-    // return (
-    //     <div className="gradient-leaderboard vh-100">
-    //         <Header />
-    //         <div className="row align-items-start w-100 m-0">
-    //
-    //             {data ? (
-    //                 <h1>Hello, {data.message}!</h1>
-    //             ) : (
-    //                 <h1> Actual practice questions coming soon... </h1>
-    //             )}
-    //         </div>
-    //         <Footer />
-    //     </div>
-    // );
     return (
         <div className="gradient-leaderboard vh-100">
             <Header />
