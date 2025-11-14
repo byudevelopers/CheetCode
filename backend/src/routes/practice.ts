@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { AuthenticatedRequest, authenticateUser } from '../middleware/auth';
 import { conn } from "@/utils/db.ts";
-import { type Card } from 'ts-fsrs';
+import { type Card, type RecordLogItem, fsrs, Rating } from 'ts-fsrs';
 import { QueryResult, RowDataPacket } from "mysql2/index";
 import { ProblemTableType } from '@/models/table';
 
@@ -32,6 +32,79 @@ interface SR_Card extends RowDataPacket {
 
 // TODO: Make sure to validate schema
 dashRoutes.post("/practice", authenticateUser, async (req: AuthenticatedRequest, res: Response) => {
+
+
+    const { userID, problemID, confidence } = req.body;
+    const getProblem =
+        `
+        SELECT Card, ProblemID
+        FROM SR_CARD 
+        WHERE UserID = ?
+        AND ProblemID = ?;
+        `
+
+
+    const updateProblemWithCard =
+        `
+    UPDATE SR_CARD
+    SET Card = ?, NextReview = ?
+    Where UserID = ? AND ProblemID = ?; 
+        `;
+
+    if (!problemID || !confidence) {
+        res.status(400).json({ success: false });
+        return;
+    }
+    try {
+
+        const [card] = (await conn.execute<SR_Card[]>(getProblem, [userID, problemID]))[0];
+
+        if (!card) {
+            // handle error
+            return;
+        }
+        /*
+const reviewTime = new Date('2025-11-10T10:05:00Z'); // 5 minutes later
+
+// 3. Simulate the user rating the card as 'Good' (Rating.Good)
+// The repeat() function returns a schedule for all four possible grades.
+const schedulingCards = f.repeat(currentCard, reviewTime);
+
+// 4. Get the scheduled card state for the actual grade (Good)
+const goodCardState: RecordLogItem = schedulingCards[Rating.Good];
+        */
+
+
+        const f = fsrs();
+
+        const schedulingCards = f.repeat(card.Card, new Date());
+
+        const validReviewRatings: number[] = [Rating.Again, Rating.Hard, Rating.Good, Rating.Easy]; // [1, 2, 3, 4]
+
+        if (!validReviewRatings.includes(confidence)) {
+            throw new Error(`Invalid rating provided: ${confidence}`);
+        }
+
+        const selectedRating = confidence as Rating;
+
+        // Oops fix at some point
+        // @ts-ignore
+        const newCard: Card = (schedulingCards[confidence] as RecordLogItem).card;
+
+        const nextReviewDate = new Date(newCard.due);
+        const parsedNextReviewDate = nextReviewDate.toISOString().replace("T", " ").replace("Z", '');
+
+        await conn.execute(updateProblemWithCard, [JSON.stringify(newCard), parsedNextReviewDate, userID, problemID]);
+        res.json({ sucess: true });
+        return;
+    }
+    catch (err) {
+
+        res.status(500).json({ success: false });
+        console.error(err);
+        return;
+
+    }
 
     //TODO: Receive the user selection of the problem (id and confidence level)
 
@@ -65,7 +138,7 @@ dashRoutes.get('/practice', authenticateUser, async (req: AuthenticatedRequest, 
 
     const getProblemByID =
         `
-    SELECT  type, title, url, difficulty FROM PROBLEM_TABLE
+    SELECT  id, type, title, url, difficulty FROM PROBLEM_TABLE
     WHERE id = ?;
     `;
 
