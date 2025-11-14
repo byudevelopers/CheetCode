@@ -14,23 +14,6 @@ function Home() {
 				background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
 				minHeight: '100vh'
 			}}>
-				{/* Navigation */}
-				<nav className="container py-4">
-					<div className="d-flex justify-content-between align-items-center">
-						<div className="d-flex align-items-center gap-2">
-							<Zap size={32} color="white" />
-							<span className="h3 mb-0 text-white fw-bold">Cheetcode</span>
-						</div>
-						<div className="d-flex gap-3">
-							<button className="btn btn-link text-white text-decoration-none">
-								Login
-							</button>
-							<button className="btn btn-light fw-semibold">
-								Sign Up
-							</button>
-						</div>
-					</div>
-				</nav>
 
 				{/* Hero Section */}
 				<div className="container text-center py-5">
