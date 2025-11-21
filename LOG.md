@@ -80,3 +80,12 @@ Orion: Figure out structured output for generating problems. Bare minimum add pr
 Garrett (Stash): Implement spaced repetition (ts-frs).
 
 Aaron & Alison: Make landing page for un-authenticated people. Figuring out the protected routes.
+
+
+11/20:
+
+Orion: Expand dataset to all leetcode questions
+
+Alison: Modify the practice page to handle the new data in the dataset
+
+Garrett: Purchase domain name and begin to configure CI / CD pipeline. And refactor here and there
