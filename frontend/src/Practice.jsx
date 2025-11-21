@@ -3,33 +3,77 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./context/auth.jsx";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { CheckCircle, Code, Terminal } from 'lucide-react';
+import { CheckCircle, Code, Terminal, ArrowRight } from 'lucide-react';
 
 function Practice() {
     const { token } = useContext(AuthContext);
     const [data, setData] = useState(null);
+    const [selectedConfidence, setSelectedConfidence] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
-        async function getData() {
-            try {
-                const response = await fetch('/api/practice', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                });
-
-                const result = await response.json();
-                console.log(result);
-                setData(result);
-            } catch (error) {
-                console.error('Error fetching practice data:', error);
-            }
-        }
-
         getData();
     }, [token]);
+
+    async function getData() {
+        try {
+            const response = await fetch('/api/practice', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+
+            const result = await response.json();
+            console.log(result);
+            setData(result);
+            setSelectedConfidence(null); // Reset selection for new card
+        } catch (error) {
+            console.error('Error fetching practice data:', error);
+        }
+    }
+
+    async function handleNextCard() {
+        if (selectedConfidence === null) {
+            alert('Please select a confidence level first');
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+            // TO-DO: Is this the correct format to send it back in??
+            const response = await fetch('/api/practice', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    problemId: data.id,
+                    confidence: selectedConfidence
+                })
+            });
+
+            if (response.ok) {
+                await getData();
+            } else {
+                console.error('Error submitting confidence level');
+            }
+        } catch (error) {
+            console.error('Error submitting confidence:', error);
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
+
+    const confidenceLevels = [
+        { level: 1, label: 'Again', color: 'danger', description: 'Completely forgot' },
+        { level: 2, label: 'Hard', color: 'warning', description: 'Struggled to recall' },
+        { level: 3, label: 'Good', color: 'info', description: 'Recalled with effort' },
+        { level: 4, label: 'Easy', color: 'success', description: 'Recalled easily' }
+    ];
 
     return (
         <div className="gradient-leaderboard min-vh-100">
@@ -38,7 +82,6 @@ function Practice() {
             {data ? (
                 <div className="container-fluid py-4">
                     <div className="row g-4">
-                        {/* Left Side - Problem Description */}
                         <div className="col-lg-6">
                             <div className="card shadow-sm h-100 border-0">
                                 <div className="card-body p-4">
@@ -50,7 +93,6 @@ function Practice() {
 
                                     <hr className="my-3" />
 
-                                    {/* Problem Description */}
                                     <div className="mb-4">
                                         <h5 className="fw-bold mb-3 text-secondary">
                                             <Terminal size={20} className="me-2" />
@@ -64,7 +106,6 @@ function Practice() {
                             </div>
                         </div>
 
-                        {/* Right Side - Examples */}
                         <div className="col-lg-6">
                             <div className="card shadow-sm h-100 border-0">
                                 <div className="card-body p-4">
@@ -100,6 +141,54 @@ function Practice() {
                                     ) : (
                                         <p className="text-muted">No examples available</p>
                                     )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row mt-4">
+                        <div className="col-12">
+                            <div className="card shadow-sm border-0">
+                                <div className="card-body p-4">
+                                    <h5 className="fw-bold mb-3">How well did you understand this problem?</h5>
+
+                                    {/* Confidence Level Buttons */}
+                                    <div className="row g-3 mb-4">
+                                        {confidenceLevels.map((conf) => (
+                                            <div key={conf.level} className="col-md-3 col-sm-6">
+                                                <button
+                                                    className={`btn btn-${conf.color} w-100 py-3 ${
+                                                        selectedConfidence === conf.level ? 'shadow-lg' : 'btn-outline-' + conf.color
+                                                    }`}
+                                                    onClick={() => setSelectedConfidence(conf.level)}
+                                                    disabled={isSubmitting}
+                                                >
+                                                    <div className="fw-bold fs-5">{conf.label}</div>
+                                                    <small className="d-block mt-1">{conf.description}</small>
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="text-center">
+                                        <button
+                                            className="btn btn-primary btn-lg px-5"
+                                            onClick={handleNextCard}
+                                            disabled={selectedConfidence === null || isSubmitting}
+                                        >
+                                            {isSubmitting ? (
+                                                <>
+                                                    <span className="spinner-border spinner-border-sm me-2" role="status"></span>
+                                                    Loading...
+                                                </>
+                                            ) : (
+                                                <>
+                                                    Next Card
+                                                    <ArrowRight size={20} className="ms-2" />
+                                                </>
+                                            )}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
