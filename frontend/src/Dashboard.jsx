@@ -8,7 +8,8 @@ import Register from "./Register.jsx";
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { AuthContext } from "./context/auth.jsx";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function Dashboard() {
     const { token } = useContext(AuthContext);
@@ -56,6 +57,14 @@ function Dashboard() {
                 p.id === id ? { ...p, completed: !p.completed } : p
             )
         );
+        fetch("/api/dashboard", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body:JSON.stringify({problemID: id})
+                });
     };
 
     const getDifficultyClass = (difficulty) => {
@@ -72,6 +81,8 @@ function Dashboard() {
     };
 
     return (
+        <div>
+        <Header />
         <div className="container mt-4">
             <h1>Dashbored</h1>
             <div className="accordion mt-3" id="problemsAccordion">
@@ -137,6 +148,8 @@ function Dashboard() {
                     </div>
                 ))}
             </div>
+            <Footer />
+        </div>
         </div>
     );
 }

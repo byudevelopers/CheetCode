@@ -92,6 +92,17 @@ Garrett: Refactor practice & dashboard routes.
 
 
 
+11/13:
+
+Orion: Update the dataset.csv and corresponding table and code in endpoints
+
+Aaron & Alison: Setup up the practice page so that user can record their
+confidence level and get another card.
+
+Garrett: Refactor practice & dashboard routes.
+
+
+
 11/20:
 
 Orion: Expand dataset to all leetcode questions
