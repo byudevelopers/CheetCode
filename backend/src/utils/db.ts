@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
-import { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE } from "../models/table.ts";
+import { USER_TABLE, USER_SESSION_TABLE, PROBLEM_TABLE, USER_PROBLEM_TABLE, SR_CARD_TABLE } from "../models/table.ts";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from "fs";

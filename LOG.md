@@ -47,3 +47,46 @@ Finish dashboard route (post).
 
 Garrett:
 Finish authenticate user middleware.
+
+
+10/23:
+Orion:
+Research FRS (Spaced repetition algo) and come up with implementation details
+
+Aaron:
+Implement barebones dashboard component that retrieves user problems
+
+Allison:
+Polish dashboard post route to make it work.
+Start a problem route
+
+Garrett:
+Do something
+
+10/30:
+Aaron:
+Finish Dashboard component
+
+Allison:
+Watch react video and start on practice component / page
+
+Orion & Garrett:
+Integrate the ts-frs (sketch) || Generate the questions
+
+11/6:
+
+Orion: Figure out structured output for generating problems. Bare minimum add problems and answer to dataset for practice page.
+
+Garrett (Stash): Implement spaced repetition (ts-frs).
+
+Aaron & Alison: Make landing page for un-authenticated people. Figuring out the protected routes.
+
+11/13:
+
+Orion: Update the dataset.csv and corresponding table and code in endpoints
+
+Aaron & Alison: Setup up the practice page so that user can record their
+confidence level and get another card.
+
+Garrett: Refactor practice & dashboard routes.
+

@@ -100,6 +100,7 @@ router.post('/login', validateSchema(BaseUserSchema), async (req: Request, res: 
         success: false,
         message: "Invalid credentials"
       })
+      return;
     }
 
 
@@ -132,12 +133,13 @@ router.post('/login', validateSchema(BaseUserSchema), async (req: Request, res: 
       success: true,
       token: jwtToken
     });
-
+    return;
   } catch (error) {
     res.status(500).json({
       success: false,
       message: 'Internal server error'
     });
+    return;
   }
 });
 
