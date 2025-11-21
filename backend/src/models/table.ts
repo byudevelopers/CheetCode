@@ -66,6 +66,14 @@ const ProblemTableSchema = z.object({
     title: z.string(),
     url: z.string(),
     difficulty: z.string(),
+    questions: z.object({
+        title: z.string(),
+        description: z.string(),
+        cards: z.array(z.object({
+            question: z.string(),
+            answer: z.string()
+        }))
+    })
 });
 
 const SRCardTableSchema = z.object({

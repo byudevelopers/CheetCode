@@ -8,16 +8,16 @@ import { ProblemTableType } from '@/models/table';
 const dashRoutes = express.Router();
 
 
-export interface Example {
-    input: string;
-    output: string;
+export interface QuestionCard {
+    question: string;
+    answer: string;
 }
 
 export interface Problem {
     id: number;
     title: string;          // Problem title
     desc: string;           // Problem description
-    examples: Example[];    // Array of examples
+    cards: QuestionCard[];    // Array of examples
 }
 
 interface ProblemTableResult extends ProblemTableType, RowDataPacket { };
@@ -139,7 +139,7 @@ dashRoutes.get('/practice', authenticateUser, async (req: AuthenticatedRequest, 
 
     const getProblemByID =
         `
-    SELECT  id, type, title, url, difficulty FROM PROBLEM_TABLE
+    SELECT  id, type, title, url, difficulty, questions FROM PROBLEM_TABLE
     WHERE id = ?;
     `;
 
@@ -150,14 +150,14 @@ dashRoutes.get('/practice', authenticateUser, async (req: AuthenticatedRequest, 
             const card = result[0] as SR_Card;
             const [problemData] = (await conn.execute<ProblemTableResult[]>(getProblemByID, [card.ProblemID]))[0];
 
-
+            if (!problemData.questions) {
+                throw new Error("Questions or description is missing");
+            }
             const parsedProblem: Problem = {
                 id: problemData.id,
                 title: problemData.title,
-                desc: "Problem Description",
-                examples: [
-                    { input: "1, 2, 3", output: "1, 2" }
-                ]
+                desc: problemData.questions.description,
+                cards: problemData.questions.cards
             }
 
             res.json(parsedProblem);

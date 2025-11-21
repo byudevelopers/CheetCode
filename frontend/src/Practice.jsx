@@ -43,7 +43,6 @@ function Practice() {
         setIsSubmitting(true);
 
         try {
-            // TO-DO: Is this the correct format to send it back in??
             const response = await fetch('/api/practice', {
                 method: 'POST',
                 headers: {
@@ -51,7 +50,7 @@ function Practice() {
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    problemId: data.id,
+                    problemID: data.id,
                     confidence: selectedConfidence
                 })
             });
@@ -111,35 +110,35 @@ function Practice() {
                                 <div className="card-body p-4">
                                     <h4 className="fw-bold mb-4">
                                         <CheckCircle size={24} className="text-success me-2" />
-                                        Examples
+                                        Questions
                                     </h4>
 
-                                    {data.examples && data.examples.length > 0 ? (
-                                        data.examples.map((ex, idx) => (
+                                    {data.cards && data.cards.length > 0 ? (
+                                        data.cards.map((ex, idx) => (
                                             <div key={idx} className="mb-4">
                                                 <div className="border rounded p-3 bg-light">
                                                     <div className="mb-2">
-                                                        <span className="badge bg-primary mb-2">Example {idx + 1}</span>
+                                                        <span className="badge bg-primary mb-2">Question {idx + 1}</span>
                                                     </div>
 
                                                     <div className="mb-2">
-                                                        <strong className="text-secondary">Input:</strong>
+                                                        <strong className="text-secondary">Question:</strong>
                                                         <div className="mt-1 p-2 bg-white rounded border">
-                                                            <code className="text-dark">{ex.input}</code>
+                                                            <code className="text-dark">{ex.question}</code>
                                                         </div>
                                                     </div>
 
                                                     <div className="mb-2">
-                                                        <strong className="text-secondary">Output:</strong>
+                                                        <strong className="text-secondary">Answer:</strong>
                                                         <div className="mt-1 p-2 bg-white rounded border">
-                                                            <code className="text-success fw-bold">{ex.output}</code>
+                                                            <code className="text-success fw-bold">{ex.answer}</code>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         ))
                                     ) : (
-                                        <p className="text-muted">No examples available</p>
+                                        <p className="text-muted">No questions available</p>
                                     )}
                                 </div>
                             </div>
@@ -152,7 +151,6 @@ function Practice() {
                                 <div className="card-body p-4">
                                     <h5 className="fw-bold mb-3">How well did you understand this problem?</h5>
 
-                                    {/* Confidence Level Buttons */}
                                     <div className="row g-3 mb-4">
                                         {confidenceLevels.map((conf) => (
                                             <div key={conf.level} className="col-md-3 col-sm-6">
