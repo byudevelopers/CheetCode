@@ -61,6 +61,7 @@ dashRoutes.post("/practice", authenticateUser, async (req: AuthenticatedRequest,
 
         if (!card) {
             // handle error
+            res.status(400).json({success:false, message:"Problem ID does not match any problems"});
             return;
         }
         /*
@@ -123,7 +124,7 @@ dashRoutes.get('/practice', authenticateUser, async (req: AuthenticatedRequest, 
     SELECT ProblemID, Card
     FROM SR_CARD 
     WHERE UserID = ?
-    ORDER BY NextReview DESC
+    ORDER BY NextReview ASC
     LIMIT 1;
     `
     /*
