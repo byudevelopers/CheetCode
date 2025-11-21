@@ -90,6 +90,7 @@ const initDb = async () => {
         await conn.execute(USER_SESSION_TABLE);
         await conn.execute(PROBLEM_TABLE);
         await conn.execute(USER_PROBLEM_TABLE);
+        await conn.execute(SR_CARD_TABLE);
 
         // 1. Read the file
         const csvContent = fs.readFileSync(datasetPath, 'utf-8');
